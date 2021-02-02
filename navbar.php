@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <style>
 .navbar {
     width: 62%;
@@ -40,8 +43,27 @@
                     </a>
                 </li>
             </ul>
-            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                เข้าสู่ระบบ</button>
+            <?php 
+            if(!isset($_SESSION['username'])) { ?>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">เข้าสู่ระบบ</button>
+            <?php
+            }else{ ?>
+            <div class="btn-group dropstart">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <?php echo $_SESSION['username'] ?>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a href="logout.php" class="dropdown-item" href="#">ออกจากระบบ</a></li>
+                </ul>
+            </div>
+            <?php
+            }
+            ?>
+
         </div>
     </div>
 </nav>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
+</script>

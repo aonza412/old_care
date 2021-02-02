@@ -31,6 +31,7 @@ div#OR {
     background: #DFDFDF;
 }
 </style>
+
 <script>
 $('#myModal').modal('show');
 </script>
@@ -64,21 +65,22 @@ $('#myModal').modal('show');
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div class="tab-pane active" id="Login">
-                            <form role="form" class="form-horizontal">
+                            <form action="login_user.php" method="post" role="form" class="form-horizontal">
                                 <br><br>
                                 <h3>เข้าสู่ระบบสำหรับผู้ใช้</h3>
                                 <div class="form-group">
                                     <h4 for="email" class="col-sm-10" align="left">
                                         อีเมล</h4>
                                     <div class="col-sm-10">
-                                        <input type="email" class="form-control" id="email1" />
+                                        <input type="email" name="email" class="form-control" id="email1" />
                                     </div>
                                 </div><br>
                                 <div class="form-group">
                                     <h4 for="exampleInputPassword1" class="col-sm-10" align="left">
                                         รหัสผ่าน</h4>
                                     <div class="col-sm-10">
-                                        <input type="password" class="form-control" id="exampleInputPassword1" />
+                                        <input type="password" name="pass" class="form-control"
+                                            id="exampleInputPassword1" />
                                     </div>
                                 </div><br>
                                 <a href="#">
@@ -97,7 +99,7 @@ $('#myModal').modal('show');
                             </form>
                         </div>
                         <div class="tab-pane" id="Registration">
-                            <form role="form" class="form-horizontal">
+                            <form action="login_caretaker.php" method="post" role="form" class="form-horizontal">
                                 <br><br>
                                 <h3>เข้าสู่ระบบสำหรับผู้ดูแล</h3>
                                 <div class="form-group">
