@@ -1,76 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <title>Old Care</title>
-    <style>
-    body {
-        background-image: url('bg.png');
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-
-    .carousel {
-        margin-left: 48%;
-        height: 700px;
-        width: 50%;
-        border: 2px;
-    }
-
-    .carousel-item img {
-        display: block;
-        height: 700px;
-        margin: auto;
-    }
-    </style>
-    <script>
-    var myModal = document.getElementById('myModal')
-    var myInput = document.getElementById('myInput')
-
-    myModal.addEventListener('shown.bs.modal', function() {
-        myInput.focus()
-    })
-    </script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+    <title>Document</title>
 </head>
-
-
 <body>
-
-    <?php include 'navbar.php'; ?><br><br><br><br><br><br>
-    <?php include 'login.php'; ?>
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        </ol>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="old1.jpg">
-            </div>
-            <div class="carousel-item">
-                <img src="old2.jpg">
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        </a>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
-        integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous">
-    </script>
+    <table class="table table-light">
+        <thead class="thead-light">
+            <tr class="table-secondary"> 
+                <td width="20%" align="center"></td>
+                <td width="20%" align="center"></td>
+                <td width="20%" align="center"><h1><font size="7"><strong>KKU</strong></font></h1><h1><font size="7"><strong>E-Sport</strong></font></h1></td>
+                <td width="20%" align="center"></td>
+                <td width="20%" align="center"></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="table-dark"><div align="center"><br>
+                    <a class="btn btn-secondary" href="score.php">ตารางการแข่งขัน</a><br><br>
+                    <a class="btn btn-secondary" href="showteam.php">ข้อมูลทีมที่เข้าร่วม</a><br><br>
+                    <a class="btn btn-secondary" href="register.php">สมัครเข้าร่วมการแข่งขัน</a><br><br>
+                </div></td>
+                <td class="table-light" colspan="3">
+                    <div align="center">
+                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <?php
+                                    include "dblink.php";
+                                    include "lib/IMGallery/imgallery-no-jquery.php";
+                                    $sql = "SELECT * FROM news";
+                                    $r = mysqli_query($link, $sql);
+                                    if(mysqli_num_rows($r) > 0) {
+                                        gallery_thumb_width(10);
+                                        gallery_thumb_height(10);
+                                        $news =mysqli_fetch_array($r);
+                                        $id=$news['news_id'];
+                                        ?>
+                                        <div class="carousel-item active">    
+                                            <img height="400" class="d-block" src="read-news.php?id=<?=$news['news_id']?>">
+                                        </div>
+                                        <?php
+                                        $sql = "SELECT * FROM news WHERE news_id != $id";
+                                        $r = mysqli_query($link, $sql);
+                                         while($news =mysqli_fetch_array($r)) { ?>
+                                            <div class="carousel-item">    
+                                            <img height="400" width="600" class="d-block" src="read-news.php?id=<?=$news['news_id']?>">
+                                            </div>
+                                        <?php }
+                                    } 
+                                ?>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>   
+                    </div>
+                </td>
+                <td class="table-dark">
+                <div align="center"><br>
+                    <a class="btn btn-secondary" href="admin.php">For Admin</a><br><br>
+                </div>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th></th>
+                <th><div align="center">**** ชายล้วน ****</div></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </tfoot>
+    </table>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="bootstrap/dist/js/bootstrap.min.js"></script> 
 </body>
-
 </html>
