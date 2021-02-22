@@ -12,6 +12,7 @@ if($_POST) {
         if(mysqli_num_rows($result) == 1){
             $row = mysqli_fetch_array($result);
             $_SESSION['username'] = $row['user_username'];
+            $_SESSION['status'] = "user";
             header("location: index.php");
             exit;
         }else{
