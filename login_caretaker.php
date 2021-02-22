@@ -13,6 +13,9 @@ if($_POST) {
             $_SESSION['username'] = $row['caretaker_username'];
             $_SESSION['status'] = "caretaker";
             $_SESSION['caretaker_id'] = $row['caretaker_id'];
+            $_SESSION['email'] = $row['caretaker_email'];
+            $_SESSION['caretaker_name'] = $row['caretaker_name'];
+            $_SESSION['caretaker_lastname'] = $row['caretaker_lastname'];
             header("location: index.php");
             exit;
         }else{

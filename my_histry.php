@@ -1,12 +1,11 @@
 <?php
 session_start();
-// error_reporting(0);
+error_reporting(0);
 $caretaker_id=$_SESSION['caretaker_id'];
 if($_POST) {
     include "dblink.php";
     $confirm_id = $_POST['confirm_id'];
     ///////////////////////
-    
     $email = $_POST['email'];
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
@@ -58,7 +57,7 @@ if($_POST) {
     ///////////////////////
     $sql1 = "UPDATE caretaker SET caretaker_email='$email',caretaker_name='$firstname',caretaker_lastname='$lastname' WHERE caretaker_id='$caretaker_id' ";
     if(mysqli_query($link, $sql1)){
-        $sql = "REPLACE INTO confirm VALUES($confirm_id,'$caretaker_id','$birthday','$sex','$status','$hight','$weight','$address','$province','$district',
+        $sql = "REPLACE INTO confirm VALUES('$confirm_id','$caretaker_id','$birthday','$sex','$status','$hight','$weight','$address','$province','$district',
         '$sub_district','$postal_code','$phone_home','$phone','$education_level','$education_category','$education_name','$faculty',
         '$educational_background','$branch','$year','$GPA','$work_data_date_start','$work_data_date_end','$work_data_company','$work_data_address',
         '$work_data_sarary','$work_data_position','$work_data_level','$work_data_detail','$training_data_date_start','$training_data_date_end','$training_data_place',
@@ -227,7 +226,6 @@ if($_POST) {
     </script>
 </head>
 
-
 <body>
     <?php include 'check_login.php'; ?>
     <?php include 'navbar.php'; ?><br>
@@ -256,22 +254,21 @@ if($_POST) {
                 <div class="form-group row">
                     <h4 for="email" class="col-sm-1" align="left">อีเมล</h4>
                     <div class="col-sm-4">
-                        <input required type="email" name="email" class="form-control"
-                            value=<?= $data['caretaker_email'] ?> />
+                        <input required type="email" name="email" class="form-control" value=<?= $_SESSION['email'] ?>>
                     </div>
                 </div><br>
                 <div class="form-group row">
                     <h4 for="firstname" class="col-sm-1" align="left">ชื่อ</h4>
                     <div class="col-sm-4">
                         <input required type="text" name="firstname" class="form-control" id="firstname"
-                            value=<?= $data['caretaker_name'] ?> />
+                            value=<?= $_SESSION['caretaker_name'] ?>>
                     </div>
                 </div><br>
                 <div class="form-group row">
                     <h4 for="lastname" class="col-sm-1" align="left">นามสกุล</h4>
                     <div class="col-sm-4">
                         <input required type="text" name="lastname" class="form-control" id="lastname"
-                            value=<?= $data['caretaker_lastname'] ?> />
+                            value=<?= $_SESSION['caretaker_lastname'] ?>>
                     </div>
                 </div><br>
                 <div class="form-group row">
